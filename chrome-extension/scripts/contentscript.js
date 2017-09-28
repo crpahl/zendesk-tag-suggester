@@ -2,15 +2,8 @@
 
 (function($){
 	$(document).ready(function(){
-		var suggestions = ['blerg1', 'blerg2', 'blerg3']
-		var tagSuggestions = createSuggestionTags(suggestions);
-
-	    setTimeout(function () {
-	    	var $tags = $('div.ember-view.form_field.tags').get(0)
-	    	//console.log($tags)
-    		$(tagSuggestions).insertAfter($tags);
-    		//console.log('inserting');
-			//console.log(createSuggestionTags());
+	    setTimeout(function () {	    	
+	    	setSuggestedTags(scrapeComments());
     	}, 5000);
 	});
 
@@ -33,7 +26,35 @@
 				${tag}
 	        </span>`
   		});
-
+1
 		return tagString
+	}
+
+	function scrapeComments()
+	{
+		return 'comments'
+	}
+
+	function setSuggestedTags(comments)
+	{
+		var comments = scrapeComments();
+
+		$.ajax({
+		  url: "https://d65cb255.ngrok.io/tags",
+		  type: "get", //send it through get method
+		  data: { 
+		    ajaxid: comments, 
+		  },
+		  success: function(response) {
+		  	var tagSuggestions = createSuggestionTags(response)
+		  	//console.log(response);
+		  	//console.log(tagSuggestions);
+		  	var $tags = $('div.ember-view.form_field.tags').get(0)
+    		$(tagSuggestions).insertBefore($tags);
+		  },
+		  error: function(xhr) {
+		    //Do Something to handle error
+		  }
+		});
 	}
 })(jQuery);
