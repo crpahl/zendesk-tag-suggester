@@ -1,0 +1,21 @@
+{
+    "name": "Suggest Ticket Tags",
+    "version": "0.1.0",
+    "manifest_version": 2,
+    "description": "Suggests tags on Zendesk tickets",
+    "permissions": [
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://getjobber.zendesk.com/*/tickets/*"
+            ],
+            "js": [
+                "lib/jquery.min.js",
+                "scripts/contentscript.js"
+            ],
+            "run_at": "document_end",
+            "all_frames": false
+        }
+    ]
+}
