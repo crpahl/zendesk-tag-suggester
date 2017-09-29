@@ -3,7 +3,7 @@
 (function($){
 	$(document).ready(function(){
 	    setTimeout(function () {	    	
-	    	setSuggestedTags(scrapeComments());
+	    	setSuggestedTags();
     	}, 5000);
 	});
 
@@ -30,25 +30,23 @@
 		return tagString
 	}
 
-	function scrapeComments()
+	function scrapeCommunications()
 	{
-		return 'comments'
+		return 'communications'
 	}
 
-	function setSuggestedTags(comments)
+	function setSuggestedTags(communications)
 	{
-		var comments = scrapeComments();
+		var communications = scrapeCommunications();
 
 		$.ajax({
-		  url: "https://39b19f62.ngrok.io/tags",
+		  url: "https://c480a59a.ngrok.io/tags",
 		  type: "get", //send it through get method
 		  data: { 
-		    ajaxid: comments, 
+		    communications: communications, 
 		  },
 		  success: function(response) {
 		  	var tagSuggestions = createSuggestionTags(response)
-		  	//console.log(response);
-		  	//console.log(tagSuggestions);
 		  	var $tags = $('div.ember-view.form_field.tags').get(0)
     		$(tagSuggestions).insertBefore($tags);
 		  },
