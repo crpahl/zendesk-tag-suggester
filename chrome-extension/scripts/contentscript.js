@@ -40,7 +40,7 @@
 		var comments = scrapeComments();
 
 		$.ajax({
-		  url: "https://d65cb255.ngrok.io/tags",
+		  url: "https://39b19f62.ngrok.io/tags",
 		  type: "get", //send it through get method
 		  data: { 
 		    ajaxid: comments, 
